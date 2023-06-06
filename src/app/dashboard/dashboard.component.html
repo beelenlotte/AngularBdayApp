@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  </head>
+  <!-- <body >
+    <div class="overview">
+        <div class="container">
+            <div class="col-12 border rounded-top">
+                This weeks Birthdays:
+            </div>
+            <div class="col-12 border rounded-bottom bday">
+              <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+                <ng-container matColumnDef="employeeId">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+                    <td mat-cell *matCellDef="let element"> {{element.employeeId}} </td>
+                </ng-container>
+              
+                <ng-container matColumnDef="firstName">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> First Name </th>
+                    <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
+                </ng-container>
+              
+                <ng-container matColumnDef="lastName">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Last Name </th>
+                    <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="columndefs"></tr>
+                <tr mat-row *matRowDef="let row; columns: columndefs;"></tr>
+              
+                <ng-container matColumnDef="startDate">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Start Date </th>
+                    <td mat-cell *matCellDef="let element"> {{element.startDate}} </td>
+                </ng-container>
+              
+                <ng-container matColumnDef="birthDay">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> BirthDay  </th>
+                    <td mat-cell *matCellDef="let element"> {{element.birthDay}} </td>
+                </ng-container>
+              </table>
+            </div>
+        </div>
+
+        <div class="container card-container">
+            <div class="row ">
+                <div class="col-sm ">
+                  <div class="col-sm card">
+                    <p>N° of Bdays this week:</p>
+                    <h1>5</h1>
+                  </div>
+                </div>
+                <div class="col-sm ">
+                    <div class="col-sm card">
+                        <p>N° of Anniversaries this week:</p>
+                        <h1>4</h1>
+                    </div>
+                </div>
+              </div>
+
+        </div>
+
+        <div class="container ">
+            <div class="col-12 border rounded-top">
+                This weeks Anniversaries:
+            </div>
+            <div class="col-12 border rounded-bottom anniversary">
+                Anniversary list
+            </div>
+
+        </div>
+
+      </div> 
+    </body> -->
+    <body>
+    <div class="main">
+        <div class=" container-fluid big"> 
+          <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+             <tr mat-header-row *matHeaderRowDef="columndefs"></tr>
+            <tr mat-row *matRowDef="let row; columns: columndefs;"></tr>
+            
+            <ng-container matColumnDef="employeeId">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Birthdays: </th>
+                <td mat-cell *matCellDef="let element"> {{element.employeeId}} </td>
+            </ng-container>
+          
+            <ng-container matColumnDef="firstName">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>  </th>
+                <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
+            </ng-container>
+          
+            <ng-container matColumnDef="lastName">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> </th>
+                <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
+            </ng-container>
+          
+            <ng-container matColumnDef="startDate">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> </th>
+                <td mat-cell *matCellDef="let element"> {{element.startDate}} </td>
+            </ng-container>
+          
+            <ng-container matColumnDef="birthDay">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>  </th>
+                <td mat-cell *matCellDef="let element"> {{element.birthDay}} </td>
+            </ng-container>
+          </table>
+        </div>
+
+        <div class="row container-fluid small">
+           <div class="col-3 card">.col-3</div>
+            <div class="col-3 card">.col-3</div>
+          </div>
+
+        <div class="container-fluid big">
+          <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+             <tr mat-header-row *matHeaderRowDef="columndefs"></tr>
+            <tr mat-row *matRowDef="let row; columns: columndefs;"></tr>
+
+            <ng-container matColumnDef="employeeId">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+                <td mat-cell *matCellDef="let element"> {{element.employeeId}} </td>
+            </ng-container>
+          
+            <ng-container matColumnDef="firstName">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> First Name </th>
+                <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
+            </ng-container>
+          
+            <ng-container matColumnDef="lastName">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Last Name </th>
+                <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
+            </ng-container>
+          
+            <ng-container matColumnDef="startDate">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Start Date </th>
+                <td mat-cell *matCellDef="let element"> {{element.startDate}} </td>
+            </ng-container>
+          
+            <ng-container matColumnDef="birthDay">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> BirthDay  </th>
+                <td mat-cell *matCellDef="let element"> {{element.birthDay}} </td>
+            </ng-container>
+          </table>
+          </div>
+    </div>
+    </body>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</html>
