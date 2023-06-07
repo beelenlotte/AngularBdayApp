@@ -1,11 +1,8 @@
-import { Component, OnInit, DefaultIterableDiffer } from '@angular/core';
-// import { MatDialog } from '@angular/material/dialog';
+import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { EmployeeColumns, Employees } from '../shared/model';
 import { ApiService } from '../shared/api.service';
 import { ToastrService } from 'ngx-toastr';
-import { HttpResponse } from '@angular/common/http';
-import {HttpClientModule} from '@angular/common/http';
 import {  catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 
@@ -16,7 +13,6 @@ import { throwError } from 'rxjs';
 })
 
 export class EditorComponent implements OnInit{
-
   displayedColumns: string[] = EmployeeColumns.map((col) => col.key);
   columnsSchema: any = EmployeeColumns;
   dataSource = new MatTableDataSource<Employees>();
@@ -24,29 +20,19 @@ export class EditorComponent implements OnInit{
   
   constructor(public apiService: ApiService, private toastr: ToastrService) {}
   
-  
   ngOnInit(): void {
-    this.apiService.getEmployees().subscribe((res: any) => {
-      this.dataSource.data = res;
-    });
+    this.getEmployees()
   }
 
-  // editRow(row: Employees) {
-  //   if (row.id === 0) {
-  //     console.log('rowid is gelijk aan 0', row.id, row)
-  //     this.apiService.addEmployee(row).subscribe((newEmployee: Employees) => {
-  //       row.id = newEmployee.id
-  //       console.log(row)
-  //       row.isEdit = false
-  //      })
-  //   } else {
-  //     console.log('ELSE rowid is NIEt gelijk aan 0')
-  //         this.apiService.updateEmployee(row).subscribe(() => (row.isEdit = false))
-  //         console.log('row', row)
-  //       }
-  // }
+  getEmployees() {
+    this.apiService.getEmployees().subscribe((res: any) => {
+      this.dataSource.data = res;
+      console.log('refresh employess')
+    });
+  }
   
   editRow(row: Employees) {
+    // To addnew employee 
     if (row.id === 0) {
       this.apiService.addEmployee(row).pipe(
       catchError(error => {
@@ -56,14 +42,15 @@ export class EditorComponent implements OnInit{
         else {
           this.showError()
         }
+        this.getEmployees()
         return throwError(error);
       })
       )
       .subscribe(response => {
-        console.log('RESPONSE ERROR',response)
       }); 
-    } else {
-        console.log('ELSE rowid is NIEt gelijk aan 0')
+    } 
+    // To edit an employee 
+    else {
         this.apiService.updateEmployee(row).pipe(
           catchError(error => {
             if(error.status === 200){
@@ -72,13 +59,13 @@ export class EditorComponent implements OnInit{
             else {
               this.showError()
             }
+            this.getEmployees()
             return throwError(error);
           })
           
           ).subscribe(() => (row.isEdit = false))
-        console.log('row', row)
+      }
     }
-}
 
   addRow() {
     const newRow: Employees = {
@@ -105,15 +92,14 @@ export class EditorComponent implements OnInit{
         else {
           this.showError()
         }
+        this.getEmployees()
         return throwError(error);
       })
-      
       ).subscribe(() => {
       this.dataSource.data = this.dataSource.data.filter(
         (u: Employees) => u.id !== id,
       )
     })
-    console.log('to be deleted id:', id)
   }
 
   inputHandler(e: any, id: number, key: string) {
@@ -130,13 +116,8 @@ export class EditorComponent implements OnInit{
     return false
   }
 
-  selectAll(event: any) {
-    this.dataSource.data = this.dataSource.data.map((item) => ({
-      ...item,
-      isSelected: event.checked,
-    }))
-  }
-
+  // Toastr: pop-up dialog with short message
+  // used to show a message after an action is taken: Add, Edit, Delete
   showSuccess(action: string) {
     console.log('Succes')
   this.toastr.success('Succes, Employee is ' + action);
