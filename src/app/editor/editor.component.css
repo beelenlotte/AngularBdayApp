@@ -1,3 +1,6 @@
+@import 'ngx-toastr/toastr';
+
+
 p {
     font-family: Lato;
   }
@@ -37,15 +40,7 @@ p {
     color: #ffffff;
     margin-right: 5px;
   }
-  
-  .button-remove {
-    color: red;
-  }
-  
-  ::ng-deep .mat-form-field-infix {
-    width: 100% !important;
-  }
-  
+
   .form-input {
     padding-right: 5px;
   }

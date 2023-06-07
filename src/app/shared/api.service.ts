@@ -33,6 +33,7 @@ export class ApiService {
   addEmployee(employee: Employees): Observable<Employees> {
     return this.http.post<Employees>(`${this.baseUrl + 'employees/addEmployee'}`, employee);
   }
+  
 
   deleteEmployee(id: number) {
     return this.http.delete<Employees>(`${this.baseUrl + 'employees/deleteEmployee'}/${id}`);

@@ -3,6 +3,11 @@ import { Component, OnInit, DefaultIterableDiffer } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { EmployeeColumns, Employees } from '../shared/model';
 import { ApiService } from '../shared/api.service';
+import { ToastrService } from 'ngx-toastr';
+import { HttpResponse } from '@angular/common/http';
+import {HttpClientModule} from '@angular/common/http';
+import {  catchError } from 'rxjs/operators';
+import { throwError } from 'rxjs';
 
 @Component({
   selector: 'app-editor',
@@ -17,7 +22,7 @@ export class EditorComponent implements OnInit{
   dataSource = new MatTableDataSource<Employees>();
   valid: any = {};
   
-  constructor(public apiService: ApiService) {}
+  constructor(public apiService: ApiService, private toastr: ToastrService) {}
   
   
   ngOnInit(): void {
@@ -25,42 +30,59 @@ export class EditorComponent implements OnInit{
       this.dataSource.data = res;
     });
   }
- 
-  // editRow(id: number, row: Employees) {
+
+  // editRow(row: Employees) {
   //   if (row.id === 0) {
-  //     console.log('rowid is gelijk aan 0', id, row)
-  //     this.apiService.updateEmployee(id, row).subscribe((newEmployee: Employees) => {
+  //     console.log('rowid is gelijk aan 0', row.id, row)
+  //     this.apiService.addEmployee(row).subscribe((newEmployee: Employees) => {
+  //       row.id = newEmployee.id
   //       console.log(row)
-  //       id = row.id
   //       row.isEdit = false
   //      })
   //   } else {
   //     console.log('ELSE rowid is NIEt gelijk aan 0')
-  //         this.apiService.updateEmployee( row.id, row).subscribe(() => (row.isEdit = false))
+  //         this.apiService.updateEmployee(row).subscribe(() => (row.isEdit = false))
   //         console.log('row', row)
   //       }
   // }
-
+  
   editRow(row: Employees) {
     if (row.id === 0) {
-      console.log('rowid is gelijk aan 0', row.id, row)
-      this.apiService.addEmployee(row).subscribe((newEmployee: Employees) => {
-        row.id = newEmployee.id
-        console.log(row)
-        row.isEdit = false
-       })
-    } else {
-      console.log('ELSE rowid is NIEt gelijk aan 0')
-          this.apiService.updateEmployee(row).subscribe(() => (row.isEdit = false))
-          console.log('row', row)
+      this.apiService.addEmployee(row).pipe(
+      catchError(error => {
+        if(error.status === 200){
+          this.showSuccess('added')
         }
-  }
+        else {
+          this.showError()
+        }
+        return throwError(error);
+      })
+      )
+      .subscribe(response => {
+        console.log('RESPONSE ERROR',response)
+      }); 
+    } else {
+        console.log('ELSE rowid is NIEt gelijk aan 0')
+        this.apiService.updateEmployee(row).pipe(
+          catchError(error => {
+            if(error.status === 200){
+              this.showSuccess('edited')
+            }
+            else {
+              this.showError()
+            }
+            return throwError(error);
+          })
+          
+          ).subscribe(() => (row.isEdit = false))
+        console.log('row', row)
+    }
+}
 
-  
   addRow() {
     const newRow: Employees = {
       id: 0,
-      // isSelected: false,
       isEdit: true,
       employeeId: '',
       firstName: '',
@@ -75,7 +97,18 @@ export class EditorComponent implements OnInit{
   }
 
   removeRow(id: number) {
-    this.apiService.deleteEmployee(id).subscribe(() => {
+    this.apiService.deleteEmployee(id).pipe(
+      catchError(error => {
+        if(error.status === 200){
+          this.showSuccess('deleted')
+        }
+        else {
+          this.showError()
+        }
+        return throwError(error);
+      })
+      
+      ).subscribe(() => {
       this.dataSource.data = this.dataSource.data.filter(
         (u: Employees) => u.id !== id,
       )
@@ -97,18 +130,20 @@ export class EditorComponent implements OnInit{
     return false
   }
 
-  // isAllSelected() {
-  //   return this.dataSource.data.every((item) => item.isSelected)
-  // }
-
-  // isAnySelected() {
-  //   return this.dataSource.data.some((item) => item.isSelected)
-  // }
-
   selectAll(event: any) {
     this.dataSource.data = this.dataSource.data.map((item) => ({
       ...item,
       isSelected: event.checked,
     }))
+  }
+
+  showSuccess(action: string) {
+    console.log('Succes')
+  this.toastr.success('Succes, Employee is ' + action);
+  }
+
+  showError() {
+    console.log('Error')
+    this.toastr.error('Something went wrong!', 'Sorry');
   }
 }

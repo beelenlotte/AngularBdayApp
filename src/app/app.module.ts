@@ -25,6 +25,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatNativeDateModule } from '@angular/material/core';
 import { FormsModule } from '@angular/forms';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { FormsModule } from '@angular/forms';
     MatDialogModule,
     MatNativeDateModule,
     FormsModule,
+    ToastrModule.forRoot(),
     RouterModule.forRoot([
       {path: 'account', component: AccountComponent},
       {path: 'dashboard', component: DashboardComponent},
