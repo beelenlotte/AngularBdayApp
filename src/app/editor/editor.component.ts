@@ -67,6 +67,10 @@ export class EditorComponent implements OnInit{
       }
     }
 
+    cancel() {
+      this.getEmployees()
+    }
+
   addRow() {
     const newRow: Employees = {
       id: 0,
