@@ -125,9 +125,15 @@
     bottom: 0;
 }
 
-/* .mat-expansion-panel-header:not([aria-disabled=true]) {
+mat-expansion-panel {
   background-color: #070933;
   color: whitesmoke;
-} */
+}
 
+mat-expansion-panel:hover {
+  color: #0070AD;
+}
 
+::ng-deep .specific-class > .mat-expansion-indicator:after {
+  color: white;
+}
