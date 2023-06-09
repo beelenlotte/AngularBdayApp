@@ -70,11 +70,11 @@ export const EmployeeColumnsBday = [
         type: 'date',
         label: 'Birth Day',
     },
-    // { 
-    //     key: 'age',
-    //     type: 'number',
-    //     label: 'Age',
-    // },
+    { 
+        key: 'age',
+        type: 'number',
+        label: 'Age',
+    },
     { 
         key: 'employeeId',
         type: 'text',
@@ -115,11 +115,11 @@ export const EmployeeColumnsJubel = [
         type: 'date',
         label: 'Start Date',
     },
-    // { 
-    //     key: 'age',
-    //     type: 'number',
-    //     label: 'Age',
-    // },
+    { 
+        key: 'Jubilee',
+        type: 'number',
+        label: 'Jubilee',
+    },
     { 
         key: 'employeeId',
         type: 'text',

@@ -10,6 +10,7 @@ import { EmployeeColumns, EmployeeColumnsBday, EmployeeColumnsJubel, Employees }
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {  
+
   constructor(public apiService: ApiService) {
   }
 
@@ -22,7 +23,14 @@ export class DashboardComponent implements OnInit {
   dataSourceJubel = new MatTableDataSource<Employees>();
 
   
-  
+  getAge() {
+   
+  }
+
+  getJubilee() {
+   
+  }
+
   getEmployeesBday() {
     this.apiService.getBirthdays().subscribe((res: any) => {
       this.dataSourceBday.data = res;

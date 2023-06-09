@@ -1,103 +1,33 @@
-/* body {
-    background-image: url('src\assets\background.jpg');
-  }
 
-.grid {
-    width: 98%;
-    height: 100%;
-    padding: 2.5% 0 2.5% 2.5%;
-    overflow: hidden;
-}
-
-.container {
-    margin-bottom: 2.5%;
-    margin-top: 2.5%;
-    padding: 1% 3%;
-}
-
-.row-containers {
-    margin: 0;
-}
-
-.overview {
-    overflow: hidden;
-    height: 100%;
-}
-
-.container {
-    height: 25%;
-}
-
-.bday, .anniversary, .row-containers {
-    height: 100%;
-}
-
-.card-container {
-    margin-left: 5%;
-    height: 20%;
-}
-
-.card {
-    background-color: #0070AD!important;
-    height: 100%;
-    width: 85%;
-    padding-bottom: 5%;
-    padding-top: 2%;
-    text-align: center; 
-    color: whitesmoke;
-}
-
- */
 .main {
     height: 100%;
-}
-
-.big {
-    height: 40%;
-    padding-top: 15px;
-}
-
-.small{
-    height: 20%;
-}
-
-.card {
-    background-color: #0070AD;
-}
-
-
-.col-3 {
-    border-radius: 30px;
-    margin: 0 10% 0 15%;
 }
 
 .mat-mdc-table .mdc-data-table__row {
     height: 20px;
 }
-
-.mdc-data-table__table {
-    border-radius: 5px;
-    border: solid 1px;
-    border-spacing: 5px;
-    box-shadow: none;
+.table-header {
+    width: 100%;
+    padding: 1%;
+    text-align: right;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
-table {
-    border-collapse: unset;
+h5 {
+    color: #0070AD;
 }
 
-.mat-mdc-table .mdc-data-table__header-row {
-    height: 20px;
-}
+.bday-table {
+    height: 48%;
+    position: absolute;
+    top: 0;
+    width: 100%;}
 
-body {
-    background-color: #ebeef5;
-}
-
-.mat-mdc-table tbody, .mat-mdc-table tfoot, .mat-mdc-table thead, .mat-mdc-cell, .mat-mdc-footer-cell, .mat-mdc-header-row, .mat-mdc-row, .mat-mdc-footer-row, .mat-mdc-table .mat-mdc-header-cell {
-    border:none
-}
-
-.thead {
-    border: solid red 5px!important;
+.jubel-table {
+    height: 48%;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
 }
