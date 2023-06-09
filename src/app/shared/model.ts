@@ -14,11 +14,7 @@ export interface Employees {
 }
 
 export const EmployeeColumns = [
-    // { 
-    //     key: 'isSelected',
-    //     type: 'isSelected',
-    //     label: '',
-    // },
+
     { 
         key: 'employeeId',
         type: 'text',
@@ -65,6 +61,96 @@ export const EmployeeColumns = [
         key: 'isEdit',
         type: 'isEdit',
         label: '',
+    },
+]
+
+export const EmployeeColumnsBday = [
+    { 
+        key: 'birthDay',
+        type: 'date',
+        label: 'Birth Day',
+    },
+    // { 
+    //     key: 'age',
+    //     type: 'number',
+    //     label: 'Age',
+    // },
+    { 
+        key: 'employeeId',
+        type: 'text',
+        label: 'ID',
+    },
+    { 
+        key: 'firstName',
+        type: 'text',
+        label: 'First Name',
+    },
+    { 
+        key: 'lastName',
+        type: 'text',
+        label: 'Last Name',
+    },
+    { 
+        key: 'address',
+        type: 'text',
+        label: 'Address',
+        required: false,
+        pattern: '',
+    },
+    { 
+        key: 'postalCode',
+        type: 'text',
+        label: 'Postal Code',
+    },
+    { 
+        key: 'city',
+        type: 'text',
+        label: 'City',
+    },
+]
+
+export const EmployeeColumnsJubel = [
+    { 
+        key: 'startDate',
+        type: 'date',
+        label: 'Start Date',
+    },
+    // { 
+    //     key: 'age',
+    //     type: 'number',
+    //     label: 'Age',
+    // },
+    { 
+        key: 'employeeId',
+        type: 'text',
+        label: 'ID',
+    },
+    { 
+        key: 'firstName',
+        type: 'text',
+        label: 'First Name',
+    },
+    { 
+        key: 'lastName',
+        type: 'text',
+        label: 'Last Name',
+    },
+    { 
+        key: 'address',
+        type: 'text',
+        label: 'Address',
+        required: false,
+        pattern: '',
+    },
+    { 
+        key: 'postalCode',
+        type: 'text',
+        label: 'Postal Code',
+    },
+    { 
+        key: 'city',
+        type: 'text',
+        label: 'City',
     },
 ]
 

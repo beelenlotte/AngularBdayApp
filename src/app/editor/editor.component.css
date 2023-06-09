@@ -1,5 +1,8 @@
 @import 'ngx-toastr/toastr';
 
+body {
+  height: 98%;
+}
 
 p {
     font-family: Lato;

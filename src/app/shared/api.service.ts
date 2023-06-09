@@ -22,6 +22,23 @@ export class ApiService {
     }))
   }
 
+  getBirthdays() {
+    return this.http.get<Employees>(this.baseUrl + 'employees/birthdays')
+    .pipe(map((item: any) => {
+      console.log(item)
+      return item
+    }))
+  }
+
+  getJubilees() {
+    return this.http.get<Employees>(this.baseUrl + 'employees/jubilees')
+    .pipe(map((item: any) => {
+      console.log(item)
+      return item
+    }))
+  }
+  
+
   // updateEmployee(id: number, employee: Employees): Observable<Employees> {
   //   return this.http.put<Employees>(`${this.baseUrl + 'employees/employees'}/${id}`, employee);
   // }
