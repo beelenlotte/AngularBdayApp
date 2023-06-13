@@ -3,7 +3,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { EmployeeColumns, Employees } from '../shared/model';
 import { ApiService } from '../shared/api.service';
 import { ToastrService } from 'ngx-toastr';
-import {  catchError } from 'rxjs/operators';
+import {  catchError, map } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 
 @Component({
@@ -27,82 +27,87 @@ export class EditorComponent implements OnInit{
   getEmployees() {
     this.apiService.getEmployees().subscribe((res: any) => {
       this.dataSource.data = res;
-      console.log('refresh employess')
     });
   }
   
+
   editRow(row: Employees) {
     // To addnew employee 
     if (row.id === 0) {
       this.apiService.addEmployee(row).pipe(
       catchError(error => {
-        if(error.status === 200){
-          this.showSuccess('added')
-        }
-        else {
+        if(error){
           this.showError()
+          this.getEmployees()
         }
-        this.getEmployees()
         return throwError(error);
       })
       )
       .subscribe(response => {
+        this.showSuccess('added')
+        this.getEmployees()
       }); 
     } 
     // To edit an employee 
     else {
+      console.log('test1')
         this.apiService.updateEmployee(row).pipe(
           catchError(error => {
-            if(error.status === 200){
+            if(error){
               this.showSuccess('edited')
-            }
-            else {
-              this.showError()
-            }
-            this.getEmployees()
+              console.log('edited')
+            }            
             return throwError(error);
           })
           
-          ).subscribe(() => (row.isEdit = false))
+          ).subscribe(response => {
+            this.showSuccess('added')
+            this.getEmployees()
+          }, () => (row.isEdit = false), 
+            
+          )
       }
+
     }
 
     cancel() {
       this.getEmployees()
     }
+public  defaultdate: Date = new Date()
 
   addRow() {
     const newRow: Employees = {
       id: 0,
+      age: 0,
+      jubilee: 0,
       isEdit: true,
-      employeeId: '',
+      employeeId: '0',
       firstName: '',
       lastName: '',
       address: '',
       postalcode: '',
       city: '',
-      birthDay: '',
+      birthDay: this.defaultdate,
       startDate: '',
     }
     this.dataSource.data = [newRow, ...this.dataSource.data]
   }
 
   removeRow(id: number) {
-    this.apiService.deleteEmployee(id).pipe(
+     this.apiService.deleteEmployee(id)  
+     .pipe(
       catchError(error => {
-        if(error.status === 200){
-          this.showSuccess('deleted')
-        }
-        else {
-          this.showError()
-        }
-        this.getEmployees()
+        const statusCode = error.status;
         return throwError(error);
+        this.showError()
       })
       ).subscribe(() => {
-      this.dataSource.data = this.dataSource.data.filter(
-        (u: Employees) => u.id !== id,
-      )
+        this.dataSource.data = this.dataSource.data.filter(
+          (u: Employees) => u.id !== id,
+          )
+          console.log('no error, 200')
+          this.showSuccess('deleted');
+          this.getEmployees()
     })
   }
 
@@ -131,4 +136,5 @@ export class EditorComponent implements OnInit{
     console.log('Error')
     this.toastr.error('Something went wrong!', 'Sorry');
   }
+
 }

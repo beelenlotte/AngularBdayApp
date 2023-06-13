@@ -8,9 +8,11 @@ export interface Employees {
     address: string;
     postalcode: string;
     city: string;
-    birthDay: string;
+    birthDay: Date;
     startDate: string;
     isEdit: boolean;
+    age: number;
+    jubilee: number;
 }
 
 export const EmployeeColumns = [
@@ -19,6 +21,16 @@ export const EmployeeColumns = [
         key: 'employeeId',
         type: 'text',
         label: 'ID',
+    },
+    { 
+        key: 'age',
+        type: 'number',
+        label: 'Age',
+    },
+    { 
+        key: 'jubilee',
+        type: 'number',
+        label: 'Jubilee',
     },
     { 
         key: 'firstName',
@@ -74,6 +86,7 @@ export const EmployeeColumnsBday = [
         key: 'age',
         type: 'number',
         label: 'Age',
+        required: false,
     },
     { 
         key: 'employeeId',
@@ -116,9 +129,10 @@ export const EmployeeColumnsJubel = [
         label: 'Start Date',
     },
     { 
-        key: 'Jubilee',
+        key: 'jubilee',
         type: 'number',
         label: 'Jubilee',
+        required: false,
     },
     { 
         key: 'employeeId',
