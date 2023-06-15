@@ -5,11 +5,13 @@ import { ApiService } from '../shared/api.service';
 import { ToastrService } from 'ngx-toastr';
 import {  catchError, map } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+import { ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'app-editor',
   templateUrl: './editor.component.html',
-  styleUrls: ['./editor.component.css']
+  styleUrls: ['./editor.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 
 export class EditorComponent implements OnInit{
@@ -48,7 +50,7 @@ export class EditorComponent implements OnInit{
         this.getEmployees()
       }); 
     } 
-    // To edit an employee 
+    // To edit an employee `
     else {
       console.log('test1')
         this.apiService.updateEmployee(row).pipe(

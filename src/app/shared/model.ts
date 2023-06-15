@@ -17,21 +17,7 @@ export interface Employees {
 
 export const EmployeeColumns = [
 
-    { 
-        key: 'employeeId',
-        type: 'text',
-        label: 'ID',
-    },
-    { 
-        key: 'age',
-        type: 'number',
-        label: 'Age',
-    },
-    { 
-        key: 'jubilee',
-        type: 'number',
-        label: 'Jubilee',
-    },
+
     { 
         key: 'firstName',
         type: 'text',
@@ -89,11 +75,6 @@ export const EmployeeColumnsBday = [
         required: false,
     },
     { 
-        key: 'employeeId',
-        type: 'text',
-        label: 'ID',
-    },
-    { 
         key: 'firstName',
         type: 'text',
         label: 'First Name',
@@ -133,11 +114,6 @@ export const EmployeeColumnsJubel = [
         type: 'number',
         label: 'Jubilee',
         required: false,
-    },
-    { 
-        key: 'employeeId',
-        type: 'text',
-        label: 'ID',
     },
     { 
         key: 'firstName',
