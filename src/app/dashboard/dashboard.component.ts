@@ -17,36 +17,100 @@ export class DashboardComponent implements OnInit {
   displayedColumnsBday: string[] = EmployeeColumnsBday.map((col) => col.key);
   columnsSchemaBday: any = EmployeeColumnsBday;
   dataSourceBday = new MatTableDataSource<Employees>();
-
   displayedColumnsJubel: string[] = EmployeeColumnsJubel.map((col) => col.key);
   columnsSchemaJubel: any = EmployeeColumnsJubel;
   dataSourceJubel = new MatTableDataSource<Employees>();
 
-  
-  getAge() {
-   
-  }
+  bdayDate = 'current'
+  bdayCount = 1
+  disableprevbday = false
+  disablenextbday = false
 
-  getJubilee() {
-   
-  }
-
-  getEmployeesBday() {
-    this.apiService.getBirthdays().subscribe((res: any) => {
-      this.dataSourceBday.data = res;
-      console.log('Bday', this.dataSourceBday)
-    });
-  }
+  jubekDate = 'current'
+  jubelCount = 1
+  disableprevjubel = false
+  disablenextjubel = false
   
-  getEmployeesJubel() {
-    this.apiService.getJubilees().subscribe((res: any) => {
-      this.dataSourceJubel.data = res;
-      console.log('Jubel', this.dataSourceBday.data)
-    });
+  today = new Date()
+
+  
+
+  getFirstDayOfWeek(d: string | number | Date) {
+    const date = new Date(d);
+    const day = date.getDay(); 
+  
+    const diff = date.getDate() - day + (day === 0 ? -6 : 1);
+  
+    return new Date(date.setDate(diff));
+    
   }
+  firstDay = this.getFirstDayOfWeek(this.today);
+  lastDay = new Date(this.firstDay)
+  lastDayOfWeek = this.lastDay.setDate(this.lastDay.getDate() + 6);
+
+  
+
   ngOnInit(): void {
-    this.getEmployeesBday()
-    this.getEmployeesJubel()
+    this.getEmployeesBday('current')
+    this.getEmployeesJubel('current')
   }
 
+  getEmployeesBday(date: string) {
+    this.apiService.getBirthdays(date).subscribe((res: any) => {
+      this.dataSourceBday.data = res;    });
+  }
+  
+  getEmployeesJubel(date: string) {
+    this.apiService.getJubilees(date).subscribe((res: any) => {
+      this.dataSourceJubel.data = res;
+    });
+  }
+
+   addOneWeek(date = new Date()) {
+    date.setDate(date.getDate() + 7);
+  
+    return date;
+  }
+
+  minusOneWeek(date = new Date()) {
+    date.setDate(date.getDate() - 7);
+  
+    return date;
+  }
+
+  prev() {
+    this.bdayCount= this.bdayCount-1 
+    this.decideDisplayedBdays()
+  }
+
+  next() {
+    this.bdayCount= this.bdayCount+1 
+    this.decideDisplayedBdays()
+  }
+
+  decideDisplayedBdays() {
+    var date = new Date()
+    if (this.bdayCount === 0) {
+      this.disableprevbday = true
+      this.disablenextbday = false
+      this.getEmployeesBday('last')
+      this.today = this.minusOneWeek()
+      
+    }
+    if (this.bdayCount === 1) {
+      this.disableprevbday = false
+      this.disablenextbday = false
+      this.getEmployeesBday('current')
+      this.today = new Date()
+    }
+    if (this.bdayCount === 2) {
+      this.disableprevbday = false
+      this.disablenextbday = true
+      this.today = this.addOneWeek()
+    }
+    this.firstDay = this.getFirstDayOfWeek(this.today)
+    this.lastDay = new Date(this.firstDay)
+    this.lastDayOfWeek = this.lastDay.setDate(this.lastDay.getDate() + 6);
+  }
+  
 }

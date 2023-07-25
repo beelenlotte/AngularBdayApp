@@ -31,3 +31,14 @@ h5 {
     bottom: 0;
     width: 100%;
 }
+
+.nav-date {
+    margin: auto;
+    width: 50%;
+}
+
+.btn-arrow {
+    background-color: white;
+    border: none;
+    cursor: pointer;
+}

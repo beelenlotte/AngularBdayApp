@@ -1,17 +1,19 @@
 @import 'ngx-toastr/toastr';
 
 body {
-  height: 98%;
+  height: 99%;
+  max-width: 99%;
 }
 
 p {
-  font-family: Lato;
+  font-family: Lato; 
 }
 
 .main-table {
   width: 97%;
   height: 85%;
   margin: 1em;
+  padding-left: 1em;
 }
 
 .btn-edit {
@@ -24,23 +26,8 @@ h2 {
   padding-top: 20px;
 }
 
-.table-header {
-  width: 100%;
-  padding: 1%;
-  text-align: right;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
 .button-add-row {
   color: #070933;
-}
-
-.button-remove-rows {
-  background: red;
-  color: #ffffff;
-  margin-right: 5px;
 }
 
 .icon-btn {
@@ -65,9 +52,9 @@ h2 {
 }
 
 .form-input {
+  display:inline-flexbox;
   width: 5em;
   height: 3.5em;
-  /* max-height: 100%; */
 }
 
 .table-responsive {
@@ -77,4 +64,23 @@ h2 {
 
 .mdc-text-field--filled:not(.mdc-text-field--disabled) {
   background-color: white;
+}
+
+
+.mdc-data-table__cell, .mdc-data-table__header-cell {
+  margin: 0!important;
+  padding-left: 1rem!important;
+}
+
+.mat-mdc-form-field {
+  width: 100%!important;
+  display: -webkit-box!important;
+}
+
+td.mat-cell {
+  border-bottom-style: none;
+}
+.mat-mdc-text-field-wrapper {
+  margin: 0!important;
+  padding: 0!important;
 }

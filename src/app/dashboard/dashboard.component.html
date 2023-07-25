@@ -10,6 +10,11 @@
     <body>
     <div class="table-responsive main-table">
         <div class="bday-table" >
+            <div class="nav-date">
+                <button [disabled]="disableprevbday" class="btn-arrow" (click)="prev()"><mat-icon>keyboard_arrow_left</mat-icon></button>
+                <span id="date-content-prev">{{firstDay  | date:'longDate'}}</span>   -    <span id="date-content-next">{{lastDay | date:'longDate'}}</span>
+                <button [disabled]="disablenextbday"class="btn-arrow"  (click)="next()"><mat-icon>keyboard_arrow_right</mat-icon></button>
+            </div>
             <h5>Upcoming Birthdays:</h5>
             <table mat-table [dataSource]="dataSourceBday.data">
                 <ng-container [matColumnDef]="col.key" *ngFor="let col of columnsSchemaBday">

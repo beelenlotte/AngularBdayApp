@@ -1,95 +1,113 @@
-<body>
-<article class="table-header">
-  <div>
-    <button class="button-add-row" mat-button (click)="addRow()">
-      <span class="material-symbols-outlined">
-        add_circle
-        </span>
-      <span class="btn-text">Add Row</span>
-    </button>
-  </div>
-</article>
-<div class="table-responsive main-table">
-<table mat-table [dataSource]="dataSource">
-  <ng-container [matColumnDef]="col.key" *ngFor="let col of columnsSchema">
-    <th mat-header-cell *matHeaderCellDef [ngSwitch]="col.key">
-      <span *ngSwitchDefault>{{ col.label }}</span>
-    </th>
-    <td mat-cell *matCellDef="let element">
-      <div class="btn-edit" [ngSwitch]="col.type" *ngIf="!element.isEdit">
-        <div class="btn-edit" *ngSwitchCase="'isEdit'">
-          <button mat-button (click)="element.isEdit = !element.isEdit">
-            Edit
-          </button>
-          <button
-            mat-button
-            class="button-remove"
-            (click)="removeRow(element.id)"F
-          >
-            Delete
-          </button>
-        </div>
-        <span *ngSwitchCase="'date'">
-          {{ element[col.key] | date: 'mediumDate' }}
-        </span>
-        <span *ngSwitchDefault>
-          {{ element[col.key] }}
-        </span>
-      </div>
-      <div [ngSwitch]="col.type" *ngIf="element.isEdit">
-        <div *ngSwitchCase="'isSelected'"></div>
-        <div class="btn-edit" *ngSwitchCase="'isEdit'">
-          <button
-            mat-button
-            (click)="editRow(element)"
-          >
-            Done
-          </button>
-          <button
-          mat-button
-          (click)="cancel()"
-        >
-          Cancel
-        </button>
-        </div>
-        <div class="edit-mode">
-        <mat-form-field fxFlex 
-          class="form-input"
-          *ngSwitchCase="'date'"
-          appearance="fill"
-        >
-          <mat-label>Choose a date</mat-label>
-          <input
-          class="input"
-            matInput
-            [matDatepicker]="picker"
-            [(ngModel)]="element[col.key]"
-          />
-          <mat-datepicker-toggle 
-            matSuffix
-            [for]="picker"
-          ></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
-        <mat-form-field fxFlex class="form-input" *ngSwitchDefault>
-          <input
-          class="input"
-            matInput
-            [required]="col.required"
-            [pattern]="col.pattern"
-            [type]="col.type"
-            [(ngModel)]="element[col.key]"
-            (change)="inputHandler($event, element.id, col.key)"
-          />
-        </mat-form-field>
-      </div>
-      </div>
-    </td>
-  </ng-container>
-  <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-</table>
-</div>
-</body>
 
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta name="description" content="Webpage description goes here" />
+  <meta charset="utf-8">
+  <title>Change_me</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="">
+  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+</head>
+
+<body>
+  
+  <article class="table-header">
+    <div>
+      <button class="button-add-row" mat-button (click)="addRow()">
+        <span class="material-symbols-outlined">
+          add_circle
+          </span>
+        <span class="btn-text">Add Row</span>
+      </button>
+    </div>
+  </article>
+  <div class="table-responsive main-table">
+  <table mat-table [dataSource]="dataSource">
+    <ng-container [matColumnDef]="col.key" *ngFor="let col of columnsSchema">
+      <th mat-header-cell *matHeaderCellDef [ngSwitch]="col.key">
+        <span *ngSwitchDefault>{{ col.label }}</span>
+      </th>
+      <td mat-cell *matCellDef="let element">
+        <div class="btn-edit" [ngSwitch]="col.type" *ngIf="!element.isEdit">
+          <div class="btn-edit" *ngSwitchCase="'isEdit'">
+            <button mat-button (click)="element.isEdit = !element.isEdit">
+              Edit
+            </button>
+            <button
+              mat-button
+              class="button-remove"
+              (click)="removeRow(element.id)"F
+            >
+              Delete
+            </button>
+          </div>
+          <span *ngSwitchCase="'date'">
+            {{ element[col.key] | date: 'mediumDate' }}
+          </span>
+          <span *ngSwitchDefault>
+            {{ element[col.key] }}
+          </span>
+        </div>
+        <div [ngSwitch]="col.type" *ngIf="element.isEdit">
+          <div *ngSwitchCase="'isSelected'"></div>
+          <div class="btn-edit" *ngSwitchCase="'isEdit'">
+            <button
+              mat-button
+              (click)="editRow(element)"
+            >
+              Done
+            </button>
+            <button
+            mat-button
+            (click)="cancel()"
+          >
+            Cancel
+          </button>
+          </div>
+          <div class="edit-mode">
+          <mat-form-field fxFlex 
+            class="form-input"
+            *ngSwitchCase="'date'"
+            appearance="fill"
+          >
+            <mat-label>Choose a date</mat-label>
+            <input
+            class="input"
+              matInput
+              [matDatepicker]="picker"
+              [(ngModel)]="element[col.key]"
+            />
+            <mat-datepicker-toggle 
+              matSuffix
+              [for]="picker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+          <mat-form-field fxFlex class="form-input" *ngSwitchDefault>
+            <input
+            class="input"
+              matInput
+              [required]="col.required"
+              [pattern]="col.pattern"
+              [type]="col.type"
+              [(ngModel)]="element[col.key]"
+              (change)="inputHandler($event, element.id, col.key)"
+            />
+          </mat-form-field>
+        </div>
+        </div>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+  </div>
+  
+<script>
+</script>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+
+</body>
+</html>

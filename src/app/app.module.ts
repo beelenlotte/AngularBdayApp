@@ -56,6 +56,7 @@ import { ToastrModule } from 'ngx-toastr';
     FormsModule,
     ToastrModule.forRoot(),
     RouterModule.forRoot([
+      {path: '', component: DashboardComponent},
       {path: 'account', component: AccountComponent},
       {path: 'dashboard', component: DashboardComponent},
       {path: 'editor', component: EditorComponent},

@@ -12,47 +12,42 @@ export class ApiService {
 
   constructor( private http: HttpClient) { }
 
-  baseUrl = 'http://localhost:8080/';
+  baseUrl = 'http://localhost:8080/api/v1/employees';
 
   getEmployees() {
-    return this.http.get<Employees>(this.baseUrl + 'employees/all')
+    return this.http.get<Employees>(this.baseUrl)
     .pipe(map((item: any) => {
       console.log(item)
       return item
     }))
   }
 
-  getBirthdays() {
-    return this.http.get<Employees>(this.baseUrl + 'employees/birthdays')
+  getBirthdays(week: string) {
+    return this.http.get<Employees>(this.baseUrl + '/birthdays?week=' + week)
     .pipe(map((item: any) => {
       console.log(item)
       return item
     }))
   }
 
-  getJubilees() {
-    return this.http.get<Employees>(this.baseUrl + 'employees/jubilees')
+  getJubilees(month: string) {
+    return this.http.get<Employees>(this.baseUrl + '/jubilees?month=' + month)
     .pipe(map((item: any) => {
       console.log(item)
       return item
     }))
   }
-  
-
-  // updateEmployee(id: number, employee: Employees): Observable<Employees> {
-  //   return this.http.put<Employees>(`${this.baseUrl + 'employees/employees'}/${id}`, employee);
-  // }
 
   updateEmployee(employee: Employees): Observable<Employees> {
     return this.http.put<Employees>(`${this.baseUrl + 'employees/employees'}/${employee.id}`, employee);
   }
 
   addEmployee(employee: Employees): Observable<Employees> {
-    return this.http.post<Employees>(`${this.baseUrl + 'employees/addEmployee'}`, employee);
+    return this.http.post<Employees>(`${this.baseUrl }`, employee);
   }
   
 
   deleteEmployee(id: number) {
-    return this.http.delete<Employees>(`${this.baseUrl + 'employees/deleteEmployee'}/${id}`);
+    return this.http.delete<Employees>(`${this.baseUrl}/${id}`);
   }
 }
