@@ -10,12 +10,13 @@
     <body>
     <div class="table-responsive main-table">
         <div class="bday-table" >
+            
+            <h5 class="center">Birthdays</h5>
             <div class="nav-date">
                 <button [disabled]="disableprevbday" class="btn-arrow" (click)="prev()"><mat-icon>keyboard_arrow_left</mat-icon></button>
-                <span id="date-content-prev">{{firstDay  | date:'longDate'}}</span>   -    <span id="date-content-next">{{lastDay | date:'longDate'}}</span>
+                <span id="date-content-prev">{{firstDayBday  | date:'longDate'}}</span>   -    <span id="date-content-next">{{lastDayBday | date:'longDate'}}</span>
                 <button [disabled]="disablenextbday"class="btn-arrow"  (click)="next()"><mat-icon>keyboard_arrow_right</mat-icon></button>
             </div>
-            <h5>Upcoming Birthdays:</h5>
             <table mat-table [dataSource]="dataSourceBday.data">
                 <ng-container [matColumnDef]="col.key" *ngFor="let col of columnsSchemaBday">
                     <th mat-header-cell *matHeaderCellDef [ngSwitch]="col.key">
@@ -36,7 +37,12 @@
 
 
         <div class="jubel-table">
-            <h5>Upcoming Jubilees:</h5>
+            <h5 class="center">Jubilees</h5>
+            <div class="nav-date">
+                <button [disabled]="disableprevjubel" class="btn-arrow" (click)="prevJubel()"><mat-icon>keyboard_arrow_left</mat-icon></button>
+                <span id="date-content-prev">{{firstDayJubel  | date:'longDate'}}</span>   -    <span id="date-content-next">{{lastDayJubel | date:'longDate'}}</span>
+                <button [disabled]="disablenextjubel"class="btn-arrow"  (click)="nextJubel()"><mat-icon>keyboard_arrow_right</mat-icon></button>
+            </div>
             <table mat-table [dataSource]="dataSourceJubel.data">
                 <ng-container [matColumnDef]="col.key" *ngFor="let col of columnsSchemaJubel">
                     <th mat-header-cell *matHeaderCellDef [ngSwitch]="col.key">

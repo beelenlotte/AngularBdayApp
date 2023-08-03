@@ -21,6 +21,7 @@
     "@angular/platform-browser": "^16.0.0",
     "@angular/platform-browser-dynamic": "^16.0.0",
     "@angular/router": "^16.0.0",
+    "@ng-bootstrap/ng-bootstrap": "^15.1.0",
     "@progress/kendo-angular-buttons": "12.1.0",
     "@progress/kendo-angular-common": "12.1.0",
     "@progress/kendo-angular-dateinputs": "12.1.0",
@@ -47,6 +48,7 @@
     "ngx-toastr": "^17.0.2",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
+    "xlsx": "^0.18.5",
     "zone.js": "~0.13.0"
   },
   "devDependencies": {

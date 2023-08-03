@@ -4,7 +4,7 @@
 }
 
 .mat-mdc-table .mdc-data-table__row {
-    height: 20px;
+    height: 50px;
 }
 .table-header {
     width: 100%;
@@ -16,29 +16,36 @@
 }
 
 h5 {
-    color: #0070AD;
+    /* color: #0070AD; */
+    color: #070933;
 }
 
 .bday-table {
     height: 48%;
     position: absolute;
     top: 0;
-    width: 100%;}
+    width: 95%;
+    margin: 0 20px;
+}
 
 .jubel-table {
     height: 48%;
     position: absolute;
     bottom: 0;
-    width: 100%;
+    width: 95%;
+    margin: 0 20px;
 }
 
 .nav-date {
-    margin: auto;
-    width: 50%;
+    text-align: center;
 }
 
 .btn-arrow {
     background-color: white;
     border: none;
     cursor: pointer;
+}
+
+.center {
+    text-align: center;
 }

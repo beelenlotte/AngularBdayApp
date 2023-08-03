@@ -39,13 +39,17 @@ export class ApiService {
   }
 
   updateEmployee(employee: Employees): Observable<Employees> {
-    return this.http.put<Employees>(`${this.baseUrl + 'employees/employees'}/${employee.id}`, employee);
+    return this.http.put<Employees>(`${this.baseUrl + 'employees/employees/excel'}/${employee.id}`, employee);
   }
 
   addEmployee(employee: Employees): Observable<Employees> {
     return this.http.post<Employees>(`${this.baseUrl }`, employee);
   }
-  
+
+  // addEmployees(employee: any): Observable<Employees> {
+  //   return this.http.post<any>(`${this.baseUrl }`, employee);
+  // }
+
 
   deleteEmployee(id: number) {
     return this.http.delete<Employees>(`${this.baseUrl}/${id}`);

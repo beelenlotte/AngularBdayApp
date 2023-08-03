@@ -1,11 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { EmployeeColumns, Employees } from '../shared/model';
+import { EmployeeColumns, Employees, ExcelEmployee } from '../shared/model';
 import { ApiService } from '../shared/api.service';
 import { ToastrService } from 'ngx-toastr';
 import {  catchError, map } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { ViewEncapsulation } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModalContentComponent } from '../modal-content/modal-content.component';
+import * as XLSX from 'xlsx';
+import { thumbnailsDownIcon } from '@progress/kendo-svg-icons';
+
 
 @Component({
   selector: 'app-editor',
@@ -19,11 +24,29 @@ export class EditorComponent implements OnInit{
   columnsSchema: any = EmployeeColumns;
   dataSource = new MatTableDataSource<Employees>();
   valid: any = {};
+  public user = {
+    name: 'Izzat Nadiri',
+    age: 26
+  }
+
   
-  constructor(public apiService: ApiService, private toastr: ToastrService) {}
+  constructor(public apiService: ApiService, private toastr: ToastrService,  public modalService: NgbModal) {}
   
   ngOnInit(): void {
     this.getEmployees()
+  }
+
+  openModal() {
+    const modalRef = this.modalService.open(ModalContentComponent);
+    modalRef.componentInstance.user = this.user;
+    modalRef.result.then((result) => {
+      if (result) {
+        console.log(result);
+      }
+    });
+    // modalRef.componentInstance.passEntry.subscribe((receivedEntry) => {
+    //   console.log(receivedEntry);
+    // })
   }
 
   getEmployees() {
@@ -81,27 +104,29 @@ public  defaultdate: Date = new Date()
     const newRow: Employees = {
       id: 0,
       age: 0,
-      jubilee: 0,
+      yearsOfService: 0,
       isEdit: true,
       employeeId: '0',
       firstName: '',
       lastName: '',
       address: '',
-      postalcode: '',
+      postalCode: '',
       city: '',
       birthDay: this.defaultdate,
-      startDate: '',
+      startDate: this.defaultdate,
     }
     this.dataSource.data = [newRow, ...this.dataSource.data]
   }
+
+  
 
   removeRow(id: number) {
      this.apiService.deleteEmployee(id)  
      .pipe(
       catchError(error => {
         const statusCode = error.status;
-        return throwError(error);
         this.showError()
+        return throwError(statusCode);
       })
       ).subscribe(() => {
         this.dataSource.data = this.dataSource.data.filter(
@@ -127,8 +152,6 @@ public  defaultdate: Date = new Date()
     return false
   }
 
-  // Toastr: pop-up dialog with short message
-  // used to show a message after an action is taken: Add, Edit, Delete
   showSuccess(action: string) {
     console.log('Succes')
   this.toastr.success('Succes, Employee is ' + action);
@@ -137,6 +160,74 @@ public  defaultdate: Date = new Date()
   showError() {
     console.log('Error')
     this.toastr.error('Something went wrong!', 'Sorry');
+  }
+
+  
+  name = 'This is XLSX TO JSON CONVERTER';
+  willDownload = false;
+
+  exceldata!: ExcelEmployee;
+  toUpload!: Employees;
+  onFileChange(ev:  any) {
+    let workBook: any = null;
+    let jsonData = null;
+    const reader = new FileReader();
+    const file = ev.target.files[0];
+
+    reader.onload = (event) => {
+      const data = reader.result;
+
+      workBook = XLSX.read(data, { type: 'binary', cellDates: true });
+      jsonData = workBook.SheetNames.reduce((initial: { [x: string]: any; }, name: string | number ) => {
+        const sheet = workBook.Sheets[name];
+        console.log('sheet',sheet)
+        initial[name] = XLSX.utils.sheet_to_json(sheet);
+        return initial;
+      }, {});
+      const dataString = JSON.stringify(jsonData);
+      this.setDownload(dataString);
+      console.log('dataString',dataString)
+         this.exceldata = JSON.parse(dataString);      
+     }
+    reader.readAsBinaryString(file);
+  }
+
+  uploadExcelData() {
+    if(this.exceldata && this.exceldata.Sheet1) {
+      for(let i=0; i<this.exceldata.Sheet1.length; i++){
+        console.log(this.exceldata.Sheet1[i]); 
+        let toUpload = this.exceldata.Sheet1[i]
+        var employee: Employees = this.mapEmployeeJsonToEmployeeModel(toUpload)
+         this.apiService.addEmployee(employee).pipe(
+          catchError(error => {
+            if(error){
+              this.showError()
+              this.getEmployees()
+            }
+            return throwError(error);
+          })
+          )
+          .subscribe(response => {
+            this.showSuccess('added')
+            this.getEmployees()
+          }); 
+    }
+      
+    }
+  }
+
+  mapEmployeeJsonToEmployeeModel(employeeJson: any): Employees { 
+    return { city: employeeJson.city, startDate: new Date(employeeJson.startDate), birthDay: new Date(employeeJson.birthDay), firstName: employeeJson.firstName, lastName: employeeJson.lastName, postalCode: employeeJson.postalCode.toString(), address: employeeJson.address
+    }
+  }
+
+  setDownload(data: any) {
+    this.willDownload = true;
+    setTimeout(() => {
+      const el = document.querySelector("#download");
+      el!.setAttribute("href", `data:text/json;charset=utf-8,${encodeURIComponent(data)}`);
+      el!.setAttribute("download", 'xlsxtojson.json');
+    }, 1000)
   }
 
 }

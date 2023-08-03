@@ -1,22 +1,34 @@
 
 export interface Employees {
     // isSelected: boolean;
-    id: number;
-    employeeId: string;
+    id?: number;
+    employeeId?: string;
     firstName: string;
     lastName: string;
     address: string;
-    postalcode: string;
+    postalCode: string;
     city: string;
-    birthDay: Date;
-    startDate: string;
-    isEdit: boolean;
-    age: number;
-    jubilee: number;
+    birthDay?: Date ;
+    startDate?: Date ;
+    isEdit?: boolean;
+    age?: number;
+    yearsOfService?: number;
 }
 
-export const EmployeeColumns = [
+export interface ExcelEmployee {
+    Sheet1: [{
+        firstName: string,
+        lastName: string,
+        address: string,
+        postalCode: string,
+        city: string,
+        birthDay: string ,
+        startDate: string ,        
+    }]
+}
 
+
+export const EmployeeColumns = [
 
     { 
         key: 'firstName',
@@ -110,7 +122,7 @@ export const EmployeeColumnsJubel = [
         label: 'Start Date',
     },
     { 
-        key: 'jubilee',
+        key: 'yearsOfService',
         type: 'number',
         label: 'Jubilee',
         required: false,
