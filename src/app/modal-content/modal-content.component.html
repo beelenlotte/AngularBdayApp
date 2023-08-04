@@ -8,9 +8,8 @@
     </button>
   </div>
   <div class="modal-body">
-    <input [(ngModel)]="user.name" type="text">
-    <input [(ngModel)]="user.age" type="number">
-    <button (click)="passBack()" type="submit" class="btn btn-primary w-100">Pass back</button>
+    <div>{{toBeDeleted | json}}</div>
+    <button (click)="delete()" type="submit" class="btn btn-primary w-100">Pass back</button>
   </div>
 
 </body>

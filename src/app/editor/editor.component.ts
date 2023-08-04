@@ -4,12 +4,11 @@ import { EmployeeColumns, Employees, ExcelEmployee } from '../shared/model';
 import { ApiService } from '../shared/api.service';
 import { ToastrService } from 'ngx-toastr';
 import {  catchError, map } from 'rxjs/operators';
-import { throwError } from 'rxjs';
+import { BehaviorSubject, throwError } from 'rxjs';
 import { ViewEncapsulation } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalContentComponent } from '../modal-content/modal-content.component';
 import * as XLSX from 'xlsx';
-import { thumbnailsDownIcon } from '@progress/kendo-svg-icons';
 
 
 @Component({
@@ -23,26 +22,48 @@ export class EditorComponent implements OnInit{
   displayedColumns: string[] = EmployeeColumns.map((col) => col.key);
   columnsSchema: any = EmployeeColumns;
   dataSource = new MatTableDataSource<Employees>();
+  canBeDeleted = false;
   valid: any = {};
   public user = {
     name: 'Izzat Nadiri',
     age: 26
   }
+ public toBeDeleted: any;
+ public toBeDeletedID: number = 206;
+ dialogOpen = false;
+ public closeResult: string = '';
 
-  
-  constructor(public apiService: ApiService, private toastr: ToastrService,  public modalService: NgbModal) {}
+  constructor(
+    public apiService: ApiService, 
+    private toastr: ToastrService,  
+    public modalService: NgbModal,
+    
+    ) {}
   
   ngOnInit(): void {
     this.getEmployees()
   }
 
-  openModal() {
+
+  
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
+  }
+  openModal(id: number) {
     const modalRef = this.modalService.open(ModalContentComponent);
+    modalRef.componentInstance.toBeDeleted = this.apiService.getEmployee(id);
     modalRef.componentInstance.user = this.user;
     modalRef.result.then((result) => {
       if (result) {
-        console.log(result);
+        console.log('result',result);
       }
+      
     });
     // modalRef.componentInstance.passEntry.subscribe((receivedEntry) => {
     //   console.log(receivedEntry);
@@ -73,7 +94,7 @@ export class EditorComponent implements OnInit{
         this.getEmployees()
       }); 
     } 
-    // To edit an employee `
+    // To edit an employee 
     else {
       console.log('test1')
         this.apiService.updateEmployee(row).pipe(
@@ -115,27 +136,76 @@ public  defaultdate: Date = new Date()
       birthDay: this.defaultdate,
       startDate: this.defaultdate,
     }
+    
     this.dataSource.data = [newRow, ...this.dataSource.data]
   }
 
-  
-
-  removeRow(id: number) {
-     this.apiService.deleteEmployee(id)  
-     .pipe(
+  delete() { 
+    this.apiService.deleteEmployee(this.idToDelete)  
+    .pipe(
       catchError(error => {
         const statusCode = error.status;
         this.showError()
         return throwError(statusCode);
       })
       ).subscribe(() => {
+        
+        this.modalService.dismissAll(ModalContentComponent);
         this.dataSource.data = this.dataSource.data.filter(
-          (u: Employees) => u.id !== id,
+          (u: Employees) => u.id !== this.idToDelete,
           )
           console.log('no error, 200')
           this.showSuccess('deleted');
           this.getEmployees()
     })
+  }
+
+  elementToDelete: any
+  idToDelete: number = 0
+
+  open(content: any, element: any) {
+    console.log('id to delete', element)
+    this.elementToDelete = element
+    this.idToDelete = element.id
+    this.modalService
+      .open(content, { ariaLabelledBy: 'modal-basic-title' })
+      .result.then(
+        (result) => {
+          this.closeResult = `Closed with: ${result}`;
+        },
+        (reason) => {
+          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+        }
+      );
+      console.log('content', content)
+  }
+
+  removeRow(id: number) {
+  
+
+    //open modal
+    //set boolean
+
+    //if boolean is true --> delete
+    //boolean false --> close modal
+
+    // console.log(id)
+    
+    //  this.apiService.deleteEmployee(id)  
+    //  .pipe(
+    //   catchError(error => {
+    //     const statusCode = error.status;
+    //     this.showError()
+    //     return throwError(statusCode);
+    //   })
+    //   ).subscribe(() => {
+    //     this.dataSource.data = this.dataSource.data.filter(
+    //       (u: Employees) => u.id !== id,
+    //       )
+    //       console.log('no error, 200')
+    //       this.showSuccess('deleted');
+    //       this.getEmployees()
+    // })
   }
 
   inputHandler(e: any, id: number, key: string) {

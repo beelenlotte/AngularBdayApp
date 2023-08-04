@@ -22,6 +22,14 @@ export class ApiService {
     }))
   }
 
+  getEmployee(id: number) {
+    return this.http.get<Employees>(this.baseUrl + '/' + id)
+    .pipe(map((item: any) => {
+      console.log(item)
+      return item
+    }))
+  }
+
   getBirthdays(week: string) {
     return this.http.get<Employees>(this.baseUrl + '/birthdays?week=' + week)
     .pipe(map((item: any) => {
@@ -45,11 +53,6 @@ export class ApiService {
   addEmployee(employee: Employees): Observable<Employees> {
     return this.http.post<Employees>(`${this.baseUrl }`, employee);
   }
-
-  // addEmployees(employee: any): Observable<Employees> {
-  //   return this.http.post<any>(`${this.baseUrl }`, employee);
-  // }
-
 
   deleteEmployee(id: number) {
     return this.http.delete<Employees>(`${this.baseUrl}/${id}`);

@@ -67,7 +67,6 @@ h2 {
   background-color: white;
 }
 
-
 .mdc-data-table__cell, .mdc-data-table__header-cell {
   margin: 0!important;
   padding-left: 1rem!important;
@@ -84,4 +83,40 @@ td.mat-cell {
 .mat-mdc-text-field-wrapper {
   margin: 0!important;
   padding: 0!important;
+}
+
+ngb-modal-backdrop {
+  z-index: 1000!important;
+}
+
+
+.delete-table {
+  margin: 1em 3em;
+  border-spacing:1em; 
+  border-collapse: separate;
+}
+
+.button-cancel, .button-delete {
+  max-width: 30%;
+  display:inline-block;
+  margin: 1em;
+}
+
+.button-delete {
+  background-color: #070933!important;
+  color: #fff!important;
+}
+
+.container {
+  text-align: center;
+  margin: 1em 3em;
+  vertical-align: middle;
+  
+  
+}
+
+.modal-title {
+  color: #070933;
+  text-align: center;
+  display: flex;
 }
