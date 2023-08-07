@@ -32,6 +32,7 @@ export class EditorComponent implements OnInit{
  public toBeDeletedID: number = 206;
  dialogOpen = false;
  public closeResult: string = '';
+ uploaded = false
 
   constructor(
     public apiService: ApiService, 
@@ -238,12 +239,17 @@ public  defaultdate: Date = new Date()
 
   exceldata!: ExcelEmployee;
   toUpload!: Employees;
+  public documentList: any[] = [];
+  fileName = '';
+
+
   onFileChange(ev:  any) {
     let workBook: any = null;
     let jsonData = null;
     const reader = new FileReader();
-    const file = ev.target.files[0];
-
+    let file = ev.target.files[0];
+    this.fileName = file.name;
+    
     reader.onload = (event) => {
       const data = reader.result;
 
@@ -259,7 +265,9 @@ public  defaultdate: Date = new Date()
       console.log('dataString',dataString)
          this.exceldata = JSON.parse(dataString);      
      }
+     this.uploaded = true;
     reader.readAsBinaryString(file);
+ 
   }
 
   uploadExcelData() {
@@ -280,10 +288,15 @@ public  defaultdate: Date = new Date()
           .subscribe(response => {
             this.showSuccess('added')
             this.getEmployees()
+            this.uploaded = false;
           }); 
     }
       
     }
+  }
+
+  removeFile() {
+    this.uploaded = false;
   }
 
   mapEmployeeJsonToEmployeeModel(employeeJson: any): Employees { 

@@ -16,17 +16,34 @@
       <button class="button-add-row" mat-button (click)="addRow()">
         <span class="material-symbols-outlined">
           add_circle
-          </span>
+        </span>
         <span class="btn-text">Add Row</span>
       </button>
-      <button class="button-excel" mat-button (click)="uploadExcelData()">
+      <label *ngIf="!uploaded" for="upload">
         <span class="material-symbols-outlined">
           upload_file
-          </span>
-        <span class="btn-text">Upload Excel</span>
+          <input id="upload" type="file" (change)="onFileChange($event)" />
+        </span>
+        <span class="btn-text">Upload File</span>
+      </label> 
+
+      <button class="upload" *ngIf="uploaded" (click)="uploadExcelData()">
+        <span class="material-symbols-outlined upload">
+          cloud_upload
+        </span>
+        {{"Upload: "}}
+        {{fileName || "No File uploaded"}}
+      </button>
+
+      <button class="delete" *ngIf="uploaded" (click)="removeFile()">
+        <span class="material-symbols-outlined delete">
+          delete
+        </span>
+        {{"Remove File: "}}
       </button>
     </div>
   </article>
+
   <div class="table-responsive main-table">
   <table mat-table [dataSource]="dataSource">
     <ng-container [matColumnDef]="col.key" *ngFor="let col of columnsSchema">

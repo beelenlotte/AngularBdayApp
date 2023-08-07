@@ -1,5 +1,6 @@
 @import 'ngx-toastr/toastr';
 
+
 body {
   height: 99%;
   max-width: 99%;
@@ -20,6 +21,7 @@ p {
 .btn-edit {
   margin: 0;
   padding: 0;
+ 
 }
 
 h2 {
@@ -50,6 +52,7 @@ h2 {
 
 .btn-text {
   color: #070933;
+  font-weight: bold;
 }
 
 .form-input {
@@ -119,4 +122,30 @@ ngb-modal-backdrop {
   color: #070933;
   text-align: center;
   display: flex;
+}
+
+.upload {
+  border: none;
+  background-color: white;
+  color: green;
+  font-weight: bold;
+}
+
+.delete {
+  border: none;
+  background-color: white;
+  color: orangered;
+  font-weight: bold;
+ }
+
+.upload:hover {
+  cursor: pointer;
+}
+
+input[type="file"]{
+  display: none;
+}
+
+label{
+  cursor: pointer;
 }
