@@ -18,7 +18,6 @@ import {CdkVirtualScrollViewport} from "@angular/cdk/scrolling";
 import { MatTableModule } from '@angular/material/table';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatCheckboxModule} from '@angular/material/checkbox';
-// import { MaterialModule, MatDatepickerModule, MatNativeDateModule } from '@angular/material';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
@@ -27,6 +26,9 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { FormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { ModalContentComponent } from './modal-content/modal-content.component';
+import { MatSortModule } from '@angular/material/sort';
+import { FlexLayoutModule } from '@angular/flex-layout';
+
 
 @NgModule({
   declarations: [
@@ -39,7 +41,7 @@ import { ModalContentComponent } from './modal-content/modal-content.component';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    MatSidenavModule,
+    MatSidenavModule, 
     MatListModule,
     MatIconModule,
     MatExpansionModule,
@@ -56,6 +58,8 @@ import { ModalContentComponent } from './modal-content/modal-content.component';
     MatDialogModule,
     MatNativeDateModule,
     FormsModule,
+    MatSortModule,
+    FlexLayoutModule,
     ToastrModule.forRoot(),
     RouterModule.forRoot([
       {path: '', component: DashboardComponent},

@@ -149,3 +149,14 @@ input[type="file"]{
 label{
   cursor: pointer;
 }
+
+
+.mat-mdc-form-field-subscript-wrapper {
+  position: absolute!important;
+}
+
+.parent {
+  max-width: 80%;
+  margin: auto;
+  padding: 10px;
+}

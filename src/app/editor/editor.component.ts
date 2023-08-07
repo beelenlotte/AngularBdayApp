@@ -1,14 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { EmployeeColumns, Employees, ExcelEmployee } from '../shared/model';
 import { ApiService } from '../shared/api.service';
 import { ToastrService } from 'ngx-toastr';
-import {  catchError, map } from 'rxjs/operators';
-import { BehaviorSubject, throwError } from 'rxjs';
+import {  catchError } from 'rxjs/operators';
+import { throwError } from 'rxjs';
 import { ViewEncapsulation } from '@angular/core';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalContentComponent } from '../modal-content/modal-content.component';
 import * as XLSX from 'xlsx';
+import {MatSort} from '@angular/material/sort';
 
 
 @Component({
@@ -18,7 +19,7 @@ import * as XLSX from 'xlsx';
   encapsulation: ViewEncapsulation.None
 })
 
-export class EditorComponent implements OnInit{
+export class EditorComponent implements OnInit, AfterViewInit{
   displayedColumns: string[] = EmployeeColumns.map((col) => col.key);
   columnsSchema: any = EmployeeColumns;
   dataSource = new MatTableDataSource<Employees>();
@@ -33,6 +34,8 @@ export class EditorComponent implements OnInit{
  dialogOpen = false;
  public closeResult: string = '';
  uploaded = false
+ @ViewChild(MatSort)
+  sort!: MatSort;
 
   constructor(
     public apiService: ApiService, 
@@ -45,8 +48,18 @@ export class EditorComponent implements OnInit{
     this.getEmployees()
   }
 
-
+  ngAfterViewInit(): void {
+    this.dataSource.sort = this.sort;
+  }
   
+  applyFilter(filterValue: any) {
+    if (filterValue) {
+      var filter = filterValue.target.value
+      this.dataSource.filter = filter.trim().toLowerCase();
+      console.log(filterValue.target.value);
+    }
+  }
+
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
       return 'by pressing ESC';
@@ -181,33 +194,6 @@ public  defaultdate: Date = new Date()
       console.log('content', content)
   }
 
-  removeRow(id: number) {
-  
-
-    //open modal
-    //set boolean
-
-    //if boolean is true --> delete
-    //boolean false --> close modal
-
-    // console.log(id)
-    
-    //  this.apiService.deleteEmployee(id)  
-    //  .pipe(
-    //   catchError(error => {
-    //     const statusCode = error.status;
-    //     this.showError()
-    //     return throwError(statusCode);
-    //   })
-    //   ).subscribe(() => {
-    //     this.dataSource.data = this.dataSource.data.filter(
-    //       (u: Employees) => u.id !== id,
-    //       )
-    //       console.log('no error, 200')
-    //       this.showSuccess('deleted');
-    //       this.getEmployees()
-    // })
-  }
 
   inputHandler(e: any, id: number, key: string) {
     if (!this.valid[id]) {

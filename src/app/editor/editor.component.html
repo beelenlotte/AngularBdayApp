@@ -44,11 +44,17 @@
     </div>
   </article>
 
+  <div class="parent">
+    <mat-form-field >
+        <input style="text-align:center;"  matInput (keyup)="applyFilter($event)" placeholder="Filter">
+    </mat-form-field>
+  </div>
+
   <div class="table-responsive main-table">
-  <table mat-table [dataSource]="dataSource">
+  <table mat-table [dataSource]="dataSource"  matSort >
     <ng-container [matColumnDef]="col.key" *ngFor="let col of columnsSchema">
-      <th mat-header-cell *matHeaderCellDef [ngSwitch]="col.key">
-        <span *ngSwitchDefault>{{ col.label }}</span>
+      <th mat-header-cell *matHeaderCellDef [ngSwitch]="col.key" mat-sort-header>
+        <span *ngSwitchDefault  >{{ col.label }} </span>
       </th>
       <td mat-cell *matCellDef="let element">
         <div class="btn-edit" [ngSwitch]="col.type" *ngIf="!element.isEdit">
