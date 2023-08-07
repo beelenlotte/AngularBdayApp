@@ -21,7 +21,7 @@ p {
   width: 97%;
   height: 85%;
   /* margin: 1em; */
-  padding: 1em 1em;
+  padding: 0 1em 1em 1em;
 }
 
 .fixed-width {
