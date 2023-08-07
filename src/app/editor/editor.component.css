@@ -1,9 +1,15 @@
 @import 'ngx-toastr/toastr';
 
 
+html {
+  height: 100vh;
+  padding: 0;
+  margin: 0;
+}
 body {
-  height: 99%;
-  max-width: 99%;
+  min-height: 100vh;
+  padding: 0;
+  margin: 0;
 }
 
 p {
@@ -14,10 +20,13 @@ p {
 .main-table {
   width: 97%;
   height: 85%;
-  margin: 1em;
-  padding-left: 1em;
+  /* margin: 1em; */
+  padding: 1em 1em;
 }
 
+.fixed-width {
+  min-width: 200px;
+}
 .btn-edit {
   margin: 0;
   padding: 0;
@@ -72,13 +81,18 @@ h2 {
 
 .mdc-data-table__cell, .mdc-data-table__header-cell {
   margin: 0!important;
-  padding-left: 1rem!important;
+  padding: 0 4px!important;
+  
 }
 
-.mat-mdc-form-field {
+.mdc-data-table__cell:first, .mdc-data-table__cell:last, .mdc-data-table__header-cell:first, .mdc-data-table__header-cell:last {
+  padding: 0px!important;
+}
+
+/* .mat-mdc-form-field {
   width: 100%!important;
   display: -webkit-box!important;
-}
+} */
 
 td.mat-cell {
   border-bottom-style: none;
@@ -159,4 +173,8 @@ label{
   max-width: 80%;
   margin: auto;
   padding: 10px;
+}
+
+.mat-mdc-form-field-flex {
+  display: inline-block!important;
 }

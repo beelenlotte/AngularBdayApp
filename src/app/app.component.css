@@ -83,6 +83,7 @@
 
 .mat-drawer-container {
     height: 100%;
+    
 }
 
 .sidenav {
@@ -138,3 +139,7 @@ mat-expansion-panel:hover {
 ::ng-deep .specific-class > .mat-expansion-indicator:after {
   color: white;
 }
+
+.mat-drawer-content {
+  overflow: initial;
+ }

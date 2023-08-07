@@ -97,7 +97,7 @@
           </div>
           <div class="edit-mode">
           <mat-form-field fxFlex 
-            class="form-input"
+            class="form-input fixed-width"
             *ngSwitchCase="'date'"
             appearance="fill"
           >
@@ -114,7 +114,7 @@
             ></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
-          <mat-form-field fxFlex class="form-input" *ngSwitchDefault>
+          <mat-form-field fxFlex class="form-input fixed-width" *ngSwitchDefault>
             <input
             class="input"
               matInput

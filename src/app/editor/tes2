@@ -1,0 +1,49 @@
+<tr role="row" mat-row="" class="mat-mdc-row mdc-data-table__row cdk-row ng-star-inserted"><td mat-cell="" class="mat-mdc-cell mdc-data-table__cell cdk-cell cdk-column-firstName mat-column-firstName ng-star-inserted" role="cell"><div class="btn-edit ng-star-inserted" ng-reflect-ng-switch="text"><!--bindings={
+  "ng-reflect-ng-switch-case": "isEdit"
+}--><!--bindings={
+  "ng-reflect-ng-switch-case": "date"
+}--><span class="ng-star-inserted"> Jubilee current </span><!--container--></div><!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><!--bindings={}--></td><td mat-cell="" class="mat-mdc-cell mdc-data-table__cell cdk-cell cdk-column-lastName mat-column-lastName ng-star-inserted" role="cell"><div class="btn-edit ng-star-inserted" ng-reflect-ng-switch="text"><!--bindings={
+  "ng-reflect-ng-switch-case": "isEdit"
+}--><!--bindings={
+  "ng-reflect-ng-switch-case": "date"
+}--><span class="ng-star-inserted"> Jubilee current </span><!--container--></div><!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><!--bindings={}--></td><td mat-cell="" class="mat-mdc-cell mdc-data-table__cell cdk-cell cdk-column-address mat-column-address ng-star-inserted" role="cell"><div class="btn-edit ng-star-inserted" ng-reflect-ng-switch="text"><!--bindings={
+  "ng-reflect-ng-switch-case": "isEdit"
+}--><!--bindings={
+  "ng-reflect-ng-switch-case": "date"
+}--><span class="ng-star-inserted"> Jubilee current </span><!--container--></div><!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><!--bindings={}--></td><td mat-cell="" class="mat-mdc-cell mdc-data-table__cell cdk-cell cdk-column-postalCode mat-column-postalCode ng-star-inserted" role="cell"><div class="btn-edit ng-star-inserted" ng-reflect-ng-switch="text"><!--bindings={
+  "ng-reflect-ng-switch-case": "isEdit"
+}--><!--bindings={
+  "ng-reflect-ng-switch-case": "date"
+}--><span class="ng-star-inserted"> Jubilee current </span><!--container--></div><!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><!--bindings={}--></td><td mat-cell="" class="mat-mdc-cell mdc-data-table__cell cdk-cell cdk-column-city mat-column-city ng-star-inserted" role="cell"><div class="btn-edit ng-star-inserted" ng-reflect-ng-switch="text"><!--bindings={
+  "ng-reflect-ng-switch-case": "isEdit"
+}--><!--bindings={
+  "ng-reflect-ng-switch-case": "date"
+}--><span class="ng-star-inserted"> Jubilee current </span><!--container--></div><!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><!--bindings={}--></td><td mat-cell="" class="mat-mdc-cell mdc-data-table__cell cdk-cell cdk-column-birthDay mat-column-birthDay ng-star-inserted" role="cell"><div class="btn-edit ng-star-inserted" ng-reflect-ng-switch="date"><!--bindings={
+  "ng-reflect-ng-switch-case": "isEdit"
+}--><span class="ng-star-inserted"> Jul 26, 2018 </span><!--bindings={
+  "ng-reflect-ng-switch-case": "date"
+}--><!--container--></div><!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><!--bindings={}--></td><td mat-cell="" class="mat-mdc-cell mdc-data-table__cell cdk-cell cdk-column-startDate mat-column-startDate ng-star-inserted" role="cell"><div class="btn-edit ng-star-inserted" ng-reflect-ng-switch="date"><!--bindings={
+  "ng-reflect-ng-switch-case": "isEdit"
+}--><span class="ng-star-inserted"> Jul 26, 2018 </span><!--bindings={
+  "ng-reflect-ng-switch-case": "date"
+}--><!--container--></div><!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><!--bindings={}--></td><td mat-cell="" class="mat-mdc-cell mdc-data-table__cell cdk-cell cdk-column-isEdit mat-column-isEdit ng-star-inserted" role="cell"><div class="btn-edit ng-star-inserted" ng-reflect-ng-switch="isEdit"><div class="btn-edit ng-star-inserted"><button mat-button-ripple-uninitialized="" mat-button="" class="mdc-button mat-mdc-button mat-unthemed mat-mdc-button-base"><span class="mat-mdc-button-persistent-ripple mdc-button__ripple"></span><span class="mdc-button__label"> Edit </span><span class="mat-mdc-focus-indicator"></span><span class="mat-mdc-button-touch-target"></span></button><button mat-button-ripple-uninitialized="" mat-button="" class="button-remove mdc-button mat-mdc-button mat-unthemed mat-mdc-button-base"><span class="mat-mdc-button-persistent-ripple mdc-button__ripple"></span><span class="mdc-button__label"> Delete </span><span class="mat-mdc-focus-indicator"></span><span class="mat-mdc-button-touch-target"></span></button></div><!--bindings={
+  "ng-reflect-ng-switch-case": "isEdit"
+}--><!--bindings={
+  "ng-reflect-ng-switch-case": "date"
+}--><!--container--></div><!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><!--bindings={}--></td><!--ng-container--></tr>
