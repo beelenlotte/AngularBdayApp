@@ -178,3 +178,13 @@ label{
 .mat-mdc-form-field-flex {
   display: inline-block!important;
 }
+
+.filter {
+  width: 100%!important;
+  text-align: center;
+}
+
+.mat-mdc-form-field-infix {
+  width: 100%!important;
+  text-align: center;
+}
