@@ -64,11 +64,16 @@ h2 {
   font-weight: bold;
 }
 
-.form-input {
+/* .form-input {
   display:inline-flexbox;
   width: 5em;
   height: 3.5em;
+} */
+
+.date {
+ font-size: 10px;
 }
+
 
 .table-responsive {
  width: 98%;
@@ -82,17 +87,11 @@ h2 {
 .mdc-data-table__cell, .mdc-data-table__header-cell {
   margin: 0!important;
   padding: 0 4px!important;
-  
 }
 
 .mdc-data-table__cell:first, .mdc-data-table__cell:last, .mdc-data-table__header-cell:first, .mdc-data-table__header-cell:last {
   padding: 0px!important;
 }
-
-/* .mat-mdc-form-field {
-  width: 100%!important;
-  display: -webkit-box!important;
-} */
 
 td.mat-cell {
   border-bottom-style: none;
@@ -105,7 +104,6 @@ td.mat-cell {
 ngb-modal-backdrop {
   z-index: 1000!important;
 }
-
 
 .delete-table {
   margin: 1em 3em;
@@ -128,8 +126,6 @@ ngb-modal-backdrop {
   text-align: center;
   margin: 1em 3em;
   vertical-align: middle;
-  
-  
 }
 
 .modal-title {
@@ -164,7 +160,6 @@ label{
   cursor: pointer;
 }
 
-
 .mat-mdc-form-field-subscript-wrapper {
   position: absolute!important;
 }
@@ -188,3 +183,7 @@ label{
   width: 100%!important;
   text-align: center;
 }
+
+/* .mat-mdc-icon-button svg, .mat-mdc-icon-button img {
+  width: 15px;
+} */

@@ -95,9 +95,12 @@
             Cancel
           </button>
           </div>
+
+
+
           <div class="edit-mode">
           <mat-form-field fxFlex 
-            class="form-input fixed-width"
+            class="form-input fixed-width date"
             *ngSwitchCase="'date'"
             appearance="fill"
           >
@@ -108,12 +111,15 @@
               [matDatepicker]="picker"
               [(ngModel)]="element[col.key]"
             />
-            <mat-datepicker-toggle 
+
+            <mat-datepicker-toggle  
               matSuffix
               [for]="picker"
             ></mat-datepicker-toggle>
+
             <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
+
           <mat-form-field fxFlex class="form-input fixed-width" *ngSwitchDefault>
             <input
             class="input"
@@ -126,6 +132,8 @@
             />
           </mat-form-field>
         </div>
+
+
         </div>
       </td>
     </ng-container>
