@@ -46,9 +46,14 @@ export class ApiService {
     }))
   }
 
-  updateEmployee(employee: Employees): Observable<Employees> {
-    return this.http.put<Employees>(`${this.baseUrl + 'employees/employees/excel'}/${employee.id}`, employee);
+  postExcel(employee: Employees): Observable<Employees> {
+    return this.http.put<Employees>(`${this.baseUrl + '/excel'}`, employee);
   }
+
+  updateEmployee(employee: Employees): Observable<Employees> {
+    return this.http.put<Employees>(`${this.baseUrl}/${employee.id}`, employee);
+  }
+
 
   addEmployee(employee: Employees): Observable<Employees> {
     return this.http.post<Employees>(`${this.baseUrl }`, employee);

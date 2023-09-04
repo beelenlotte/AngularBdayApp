@@ -51,7 +51,8 @@ export class DashboardComponent implements OnInit {
 
   getEmployeesBday(date: string) {
     this.apiService.getBirthdays(date).subscribe((res: any) => {
-      this.dataSourceBday.data = res;    
+      this.dataSourceBday.data = res;  
+      console.log('bdays', res) 
     });
   }
   
